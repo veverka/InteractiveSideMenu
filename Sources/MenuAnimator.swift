@@ -124,8 +124,8 @@ private extension MenuInteractiveTransition {
 
             toViewController.view.transform = CGAffineTransform(scaleX: options.contentScale, y: options.contentScale)
             addShadow(to: toViewController.view)
-
-            let newOrigin = CGPoint(x: screenWidth - options.visibleContentWidth, y: toViewController.view.frame.origin.y)
+            
+            let newOrigin = CGPoint(x: 0 - options.visibleContentWidth, y: toViewController.view.frame.origin.y)
             let rect = CGRect(origin: newOrigin, size: toViewController.view.frame.size)
 
             toViewController.view.frame = rect
@@ -303,7 +303,7 @@ private extension MenuInteractiveTransition {
             }
 
         case .changed:
-            if transitionStarted && (present && dx > 0 || !present && dx < 0) {
+            if transitionStarted && (present && dx < 0 || !present && dx > 0) {
                 guard let transitionContext = transitionContext else {
                     fatalError("Invalid `transitionContext` value. This property should not be nil")
                 }
@@ -364,8 +364,8 @@ private extension MenuInteractiveTransition {
             let newX = totalWidth * percentComplete
 
             contentSnapshotView.transform = CGAffineTransform(scaleX: newScale, y: newScale)
-
-            let newOrigin = CGPoint(x: newX, y: contentSnapshotView.frame.origin.y)
+            
+            let newOrigin = CGPoint(x: 0 - newX, y: contentSnapshotView.frame.origin.y)
             let rect = CGRect(origin: newOrigin, size: contentSnapshotView.frame.size)
 
             contentSnapshotView.frame = rect
@@ -379,8 +379,8 @@ private extension MenuInteractiveTransition {
 
             let newScale = options.contentScale + (1 - options.contentScale) * percentComplete
             toViewController.view.transform = CGAffineTransform(scaleX: newScale, y: newScale)
-
-            let newOrigin = CGPoint(x: newX, y: toViewController.view.frame.origin.y)
+            
+            let newOrigin = CGPoint(x: 0 - newX, y: toViewController.view.frame.origin.y)
             let rect = CGRect(origin: newOrigin, size: toViewController.view.frame.size)
 
             toViewController.view.frame = rect
